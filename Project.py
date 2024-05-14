@@ -44,7 +44,7 @@ def edit_contact():
     3- Phone Number
     Choice: """)).lower()
             if choice == "1":
-                new_email = input("Enter the new email address: ").lower()
+                new_email = input("Enter the new email address: \n").lower()
                 if is_valid_email(new_email):
                     contact_info = contacts.pop(email)
                     contact_info['E-mail'] = new_email
@@ -54,13 +54,13 @@ def edit_contact():
                 else:
                     print("Invalid email format. Please enter a valid email address.")
             elif choice == "2":
-                new_name = input("Enter the new name: ").lower()
+                new_name = input("Enter the new name: \n").lower()
                 contact_info = contacts[email]
                 contact_info['Name'] = new_name
                 print("Contact edited successfully!")
                 break
             elif choice == "3":
-                new_phone_num = input("Enter the new phone number: ")
+                new_phone_num = input("Enter the new phone number: \n")
                 if is_valid_phone_number(new_phone_num):
                     contact_info = contacts[email]
                     contact_info['Phone Number'] = new_phone_num
@@ -76,7 +76,7 @@ def edit_contact():
         
 def delete_contact():
     global contacts
-    email = input("Enter the e-mail address of the contact you want to delete: ").lower()
+    email = input("Enter the e-mail address of the contact you want to delete: \n").lower()
     if email in contacts:
         verify = input(f"Are you sure you want to delete this contact {email}? y/n: ").lower()
         if verify == "y":
@@ -89,7 +89,7 @@ def delete_contact():
 
 def search_contact():
     global contacts
-    email = input("Enter the e-mail address of the contact you want to search for: ").lower()
+    email = input("Enter the e-mail address of the contact you want to search for: \n").lower()
     if email in contacts:
         print("Contact found:")
         print("Name:", contacts[email]["Name"])
@@ -112,7 +112,21 @@ def display_contacts():
         print("No contacts found.")
 
 def export_contacts():
-    pass
+    global contacts
+    filename = input("Enter the filename to save contacts (e.g., contacts.txt): ")
+    try:
+        with open(filename, 'w') as file:
+            for email, contact_info in contacts.items():
+                file.write(f"Email: {email}\n")
+                file.write(f"Name: {contact_info['Name']}\n")
+                file.write(f"Phone Number: {contact_info['Phone Number']}\n")
+                additional_info = contact_info.get('Additional Information', 'N/A')
+                file.write(f"Additional Information: {additional_info}\n")
+                file.write("------------------------\n")
+        print("Contacts exported successfully!")
+    except IOError:
+        print("Error: Unable to write to the file.")
+
 
 def import_contact():
     pass
