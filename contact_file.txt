@@ -1,0 +1,8 @@
+Email: karen@gmail.com
+Name: karen campos
+Phone Number: 510-804-6580
+Additional Information: Address: 123 Main St, City: Anytown, Country: USA
+------------------------
+Email: jane.smith@example.com
+Name: Jane Smith
+Phone Number: 555-987-6543

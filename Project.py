@@ -129,7 +129,22 @@ def export_contacts():
 
 
 def import_contact():
-    pass
+    global contacts
+    filename = input("Enter the filename to import contacts from: (ex: contact_file.txt) ")
+    try:
+        with open(filename, 'r') as file:
+            contact_lines = file.readlines()
+            contact = {}
+            for line in contact_lines:
+                if line.strip() == "------------------------":
+                    contacts[contact['Email']] = contact
+                    contact = {}
+                else:
+                    key, value = line.strip().split(': ')
+                    contact[key] = value
+        print("Contacts imported successfully!")
+    except FileNotFoundError:
+        print("Error: File not found.")
 
 
 def run_contact_manager():
